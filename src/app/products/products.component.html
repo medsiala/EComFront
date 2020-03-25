@@ -1,0 +1,48 @@
+
+
+<div>
+  <h3>{{title}}</h3>
+</div>
+
+<div *ngIf="products">
+  <div *ngFor="let p of products._embedded.products">
+    <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel panel-heading"> {{p.name}}</div>
+      <div class="panel-body">
+        <tr>
+          <td rowspan="3">
+            <img height="100" src="{{this.catService.host+'/photoProduct/'+p.id}}"/>
+             <p>
+             <button (click)="onEditPhoto(p)">
+              <span class="glyphicon glyphicon-edit"></span>
+            </button>
+             </p>
+            <p *ngIf="editPhoto==true && currentProduct==p" >
+              <input type="file" (change)="onSelectedFile($event)">
+              <button class="btn btn-success" (click)="uploadPhoto()">Upload</button>
+              {{progress}}
+            </p>
+            <div class="progress form-group" *ngIf="progress >= 0">
+              <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width.%]="progress">
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>Prix: {{p.currentPrice| number:'0.2'}}</td>
+        </tr>
+        <tr>
+          <td>{{p.description}}</td>
+        </tr>
+
+      </div>
+
+
+
+    </div>
+
+    </div>
+  </div>
+
+</div>
